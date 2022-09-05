@@ -1,2 +1,1 @@
-shell permissions
-shell permissions
+shell I/O redirections 
