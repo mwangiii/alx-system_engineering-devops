@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#this script echos "Best school" 10 times on the screen
+x=1
+while [ $x -le 9 ];
+do
+  echo $"Best School"
+  ((x++))
+if [ $x -eq 9 ]
+then
+  echo "Hi"
+fi
+done
