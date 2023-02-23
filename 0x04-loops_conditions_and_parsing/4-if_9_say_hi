@@ -5,8 +5,7 @@ while [ $x -le 9 ];
 do
   echo $"Best School"
   ((x++))
-if [ $x -eq 9 ]
-then
+if  [ "$x" -eq 9 ];then
   echo "Hi"
 fi
 done
