@@ -1,1 +1,1 @@
-This dir contains regular expressions written in Ruby.
+This dir contains Regular expression written in ruby
