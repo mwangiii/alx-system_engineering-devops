@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 # Prints all the words that start with h, end with n, and have between 2 and 5 t's in between.
-puts ARGV[0].scan(/h(b*)tn/).join
+puts ARGV[0].scan(/hb?tn/).join
