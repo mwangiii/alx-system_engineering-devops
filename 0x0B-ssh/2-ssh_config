@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+Host 127.0.0.1
+  IdentityFile ~/.ssh/school
+  PreferredAuthentications publickey
+  PasswordAuthentication no
+
