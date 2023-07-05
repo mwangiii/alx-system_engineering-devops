@@ -1,32 +1,33 @@
 #!/usr/bin/env bash
-<<<<<<< HEAD
+#Configures Nginx so that its HTTP response contains a custom header
 
-# Update and upgrade installed packages
+#installing nginx
 sudo apt-get update
-sudo apt-get upgrade -y
+sudo apt-get -y install nginx
 
-# Install Nginx
-sudo apt-get install nginx -y
+# configuring firewall 
+sudo ufw allow 'Nginx HTTP'
 
-# Configure Nginx to include the custom HTTP response header
-echo 'add_header X-Served-By $hostname;' | sudo tee -a /etc/nginx/nginx.conf
+sudo mkdir -p /var/www/html
 
-# Restart Nginx to apply changes
-sudo systemctl restart nginx
-=======
-# Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
+# configuring permissions for /var/www directory
+sudo chmod -R 755 /var/www
 
-sudo apt-get update -y
-sudo apt-get install nginx -y
-
+# the index page
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/error_page.html
 
-sudo sed -i '/listen \[\:\:\]\:80 default_server/ a \\n\trewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-enabled/default
 
-sudo sed -i '/rewrite/ a \\n\terror_page 404 /error_page.html;' /etc/nginx/sites-enabled/default
-sudo sed -i '/# pass PHP scripts to FastCGI server/ i \\tlocation = /error_page.html {\n\t\troot /usr/share/nginx/html;\n\t}\n' /etc/nginx/sites-enabled/default
+# create the webpage for error 404
+sudo sh -c 'echo "Ceci n'\''est pas une page" > /var/www/html/404.html'
 
-sudo sed -i '/error_page/ a \\tadd_header X-Served-By $HOSTNAME;' /etc/nginx/sites-enabled/default
+
+# configuring redirect and header to display hostname
+redirect_config="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https://www.youtube.com/ permanent;"
+sudo sed -i "s#server_name _;#$redirect_config#" /etc/nginx/sites-enabled/default
+
+# configuring redirect for 404 error page
+error_page_config="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$error_page_config/" /etc/nginx/sites-enabled/default
+
+# restarting web server after updating
 sudo service nginx restart
->>>>>>> 689f93283eea486ac51667b8b21c5fa7c868a4d5
