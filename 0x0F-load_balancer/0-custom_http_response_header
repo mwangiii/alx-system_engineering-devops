@@ -1,12 +1,33 @@
 #!/usr/bin/env bash
-# This script configures a new Ubuntu machine to add a custom HAProxy response header
+#Configures Nginx so that its HTTP response contains a custom header
 
-# Update package information and install HAProxy
+#installing nginx
 sudo apt-get update
-sudo apt-get -y install haproxy
+sudo apt-get -y install nginx
 
-# Create a custom HAProxy configuration file
-echo 'http-response set-header X-Served-By %[hostname]' | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
+# configuring firewall 
+sudo ufw allow 'Nginx HTTP'
 
-# Restart HAProxy to apply the changes
-sudo service haproxy restart
+sudo mkdir -p /var/www/html
+
+# configuring permissions for /var/www directory
+sudo chmod -R 755 /var/www
+
+# the index page
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+
+
+# create the webpage for error 404
+sudo sh -c 'echo "Ceci n'\''est pas une page" > /var/www/html/404.html'
+
+
+# configuring redirect and header to display hostname
+redirect_config="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https://www.youtube.com/ permanent;"
+sudo sed -i "s#server_name _;#$redirect_config#" /etc/nginx/sites-enabled/default
+
+# configuring redirect for 404 error page
+error_page_config="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$error_page_config/" /etc/nginx/sites-enabled/default
+
+# restarting web server after updating
+sudo service nginx restart
