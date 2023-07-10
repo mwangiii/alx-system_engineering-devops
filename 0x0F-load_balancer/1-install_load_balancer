@@ -13,8 +13,8 @@ frontend sage-frontend
 
 backend sage-backend
         balance roundrobin
-        server 131064-web-01 54.175.166.7:80 check
-        server 131064-web-02 18.204.16.81:80 check
+        server 131064-web-01 100.25.48.64:80 check
+        server 131064-web-02 52.87.232.106:80 check
 "
 echo "$server_config" |sudo tee -a /etc/haproxy/haproxy.cfg
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
