@@ -1,0 +1,28 @@
+<html>
+<head><title>A Sample HTML Form</title></head>
+<body>
+  <h2 align="left">A Sample HTML Data Entry Form</h2>
+  <form method="get" action="/bin/process">
+    Enter your name: <input type="text" name="username"><br />
+    Enter your password: <input type="password" name="password"><br />
+    Which year?
+    <input type="radio" name="year" value="2" />Yr 1
+    <input type="radio" name="year" value="2" />Yr 2
+    <input type="radio" name="year" value="3" />Yr 3<br />
+    Subject registered:
+    <input type="checkbox" name="subject" value="e101" />E101
+    <input type="checkbox" name="subject" value="e102" />E102
+    <input type="checkbox" name="subject" value="e103" />E103<br />
+    Select Day:
+    <select name="day">
+      <option value="mon">Monday</option>
+      <option value="wed">Wednesday</option>
+      <option value="fri">Friday</option>
+    </select><br />
+    <textarea rows="3" cols="30">Enter your special request here</textarea><br />
+    <input type="submit" value="SEND" />
+    <input type="reset" value="CLEAR" />
+    <input type="hidden" name="action" value="registration" />
+  </form>
+</body>
+</html>
