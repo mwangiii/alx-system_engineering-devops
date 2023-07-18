@@ -1,0 +1,17 @@
+When you enter "https://www.google.com" in your browser and press Enter, the first step is a DNS request. The browser needs to translate the domain name "www.google.com" into an IP address. It sends this request to a DNS resolver. The resolver checks its cache to see if it already has the IP address for that domain. If not, it recursively queries the DNS hierarchy until it obtains the IP address for "www.google.com".
+
+Once the IP address is obtained, the browser establishes a TCP/IP connection with the server hosting Google. The Transmission Control Protocol (TCP) ensures reliable data transmission by breaking it into packets and managing their delivery. The Internet Protocol (IP) handles addressing and routing, allowing the packets to reach their destination.
+
+Before the connection is established, the request may go through a firewall. The firewall filters incoming and outgoing network traffic based on predefined security rules. It helps protect the network from unauthorized access and potential threats.
+
+Since we used "https://" in the URL, the connection is secured using HTTPS (Hypertext Transfer Protocol Secure) with SSL (Secure Sockets Layer) or its successor, TLS (Transport Layer Security). This encryption protocol ensures that the data transmitted between the browser and the server remains confidential and tamper-proof.
+
+After the secure connection is established, the request goes through a load balancer. Load balancers distribute incoming network traffic across multiple servers to ensure efficient resource utilization and improve performance. It helps handle high volumes of requests by evenly distributing the load.
+
+The request then reaches the web server, which is responsible for handling HTTP requests. It processes the request and generates an appropriate response. The web server may communicate with an application server, if necessary, to fetch dynamic content or perform additional processing.
+
+If the application server is involved, it handles the request and interacts with the necessary components, such as databases, to retrieve or store data. The application server executes the required logic and generates a response, which is then sent back to the web server.
+
+Finally, the web server sends the response back to the browser over the established TCP/IP connection. The browser receives the response, interprets the HTML, CSS, and JavaScript, and renders the webpage for the user to see and interact with.
+
+In summary, when you type "https://www.google.com" in your browser and press Enter, the journey involves a DNS request, TCP/IP connection establishment, firewall protection, HTTPS/SSL encryption, load balancing, web server processing, potential application server interaction, and database operations. These steps work together to ensure a secure and efficient browsing experience for users.
